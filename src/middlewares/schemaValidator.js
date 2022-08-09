@@ -1,4 +1,4 @@
-export function validateSchema(schema){
+export function schemaValidator(schema){
     
     return (req, res, next) => {
 
