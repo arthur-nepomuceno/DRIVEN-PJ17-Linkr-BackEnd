@@ -10,7 +10,7 @@ const connection = {
 };
 
 if(process.env.MODE === 'PROD'){
-    connection.ssl = {
+     connection.ssl = {
         rejectUnauthorized: false
     }
 }

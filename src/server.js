@@ -8,8 +8,8 @@ const server = express();
 
 server.use(cors(), express.json());
 
-app.use(router);
+server.use(router);
 
-const PORT = 5000 || process.env.PORT;
+const PORT = 4000 || process.env.PORT;
 
 server.listen(PORT, console.log(`Server running successfully at PORT ${PORT}.`))
