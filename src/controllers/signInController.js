@@ -4,7 +4,7 @@ export default async function login(req, res){
     try{
         const SECRET_KEY = process.env.JWT_SECRET;
         const token = jwt.sign({id:query.id}, SECRET_KEY, {expiresIn: '15 minutes'});
-         return res.status(200).send({token: token});
+        return res.status(200).send({token: token});
     } catch(error){
         return res.status(500).send(`${error}.`)
     }
