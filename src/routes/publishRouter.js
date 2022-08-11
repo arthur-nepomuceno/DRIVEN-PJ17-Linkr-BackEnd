@@ -1,9 +1,9 @@
 import { Router } from "express";
-import isValidToken from "../middlewares/isValidToken.js"
+import tokenValidator from "../middlewares/tokenValidator.js"
 import publishController from "../controllers/publishController.js";
 
 const publishRouter = Router();
 
-publishRouter.post('/publish', isValidToken, publishController);
+publishRouter.post('/publish', tokenValidator, publishController);
 
 export default publishRouter;
