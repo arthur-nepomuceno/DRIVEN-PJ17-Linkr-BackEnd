@@ -1,7 +1,7 @@
-import { createUser } from "../repositories/authRepository.js";
+import { createUser } from "../repositories/usersRepository.js";
 import passwordEncrypter from "../utilities/passwordEncrypter.js";
 
-async function postSingUp(req, res){
+export default async function signUp(req, res){
     const {email, password, userName, pictureUrl} = req.body;
     const secret = passwordEncrypter(password);
     const user = {email, password: secret, userName, pictureUrl};
@@ -13,5 +13,3 @@ async function postSingUp(req, res){
         return res.status(500).send(error);
     }
 };
-
-export { postSingUp };
