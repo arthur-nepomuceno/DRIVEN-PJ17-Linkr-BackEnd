@@ -19,7 +19,7 @@ export default async function validateUser(req, res, next) {
             const { id: userId } = jwt.verify(token, secretKey)
 
             res.locals.userId = userId;
-  
+
              return next();
         });
     }
