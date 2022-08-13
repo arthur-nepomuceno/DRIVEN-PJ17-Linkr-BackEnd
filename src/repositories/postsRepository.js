@@ -18,7 +18,8 @@ function getPosts(){
                         posts.content, 
                         posts.url, 
                         posts."createdAt"
-                    ORDER BY posts."createdAt";`)
+                    ORDER BY posts."createdAt" DESC
+                    LIMIT 20;`)
     return db.query(query);
 }
 

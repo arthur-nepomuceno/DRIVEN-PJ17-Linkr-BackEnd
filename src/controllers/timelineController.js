@@ -1,23 +1,20 @@
-import { getPosts, getPostsLikesList } from "../repositories/postsRepository.js"
+import urlMetadata from "url-metadata";
 
 export default async function timeline(req, res){
-    try {
-        const {rows: posts} = await getPosts();
-        const {rows: likesList} = await getPostsLikesList();
-        
-        let likes = []
-        posts.map(post => {
-            let names = []
-            likesList.map(like => {
-                if(post.id === like.postId){
-                    names.push(like.userName)
-                }
-            })
-            likes.push(names);
-        })
+    const posts = res.locals.posts;
 
-        return res.status(200).send(likes);
+    try {
+
+        for(let i = 0; i < posts.length; i++){
+            const metadata = await urlMetadata(posts[i].postUrl);
+            posts[i].urlTitle = metadata.title;
+            posts[i].urlDescription = metadata.description;
+            posts[i].urlImage = metadata.image;
+        }
+
+        return res.send(posts);
+
     } catch(error) {
-        return res.status(500).send(error)
+        return res.status(500).send(error);
     }
 }  
