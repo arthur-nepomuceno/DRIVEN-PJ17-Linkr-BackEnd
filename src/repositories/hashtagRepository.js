@@ -1,14 +1,14 @@
 import db from "../database/postgres.js";
 
-function getHashtagByName(){
+async function getHashtagByName(hashtagName){
     return db.query(`
         SELECT * FROM hashtags
-        WHERE hashtag.name = ($1)`,
+        WHERE name = ($1)`,
         [hashtagName]
     );
 }
 
-function getTrendingHashtags(){
+async function getTrendingHashtags(){
     return db.query(`
         SELECT  name AS hashtag, 
                 COUNT("hashtagId") AS mentions
@@ -21,9 +21,10 @@ function getTrendingHashtags(){
     );
 }
 
-function getHashtagPosts(hashtagName){
+async function getHashtagPosts(hashtagName){
     return db.query(`
-        SELECT  name AS hashtag, 
+        SELECT  name AS hashtag,
+                posts.id AS "postId",
                 users."userName", 
                 users."pictureUrl" AS "userImage",
                 posts.content AS "postDescription",
@@ -36,6 +37,7 @@ function getHashtagPosts(hashtagName){
         LEFT JOIN likes ON likes."postId" = posts.id
         WHERE hashtags.name = ($1)
         GROUP BY    hashtags.name, 
+                    posts.id,
                     users."userName", 
                     users."pictureUrl", 
                     posts.content, 
@@ -47,8 +49,26 @@ function getHashtagPosts(hashtagName){
     );
 }
 
+async function insertHashtag(hashtagName){
+    return db.query(`
+        INSERT INTO hashtags (name)
+        VALUES ($1) RETURNING id`,
+        [hashtagName]
+    );
+}
+
+async function insertPostsHashtags(postId, hashtagId){
+    return db.query(`
+        INSERT INTO "postsHashtags" ("postId", "hashtagId")
+        VALUES ($1, $2);`,
+        [postId, hashtagId]
+    );
+}
+
 export {
     getHashtagByName,
     getTrendingHashtags,
-    getHashtagPosts
+    getHashtagPosts,
+    insertHashtag,
+    insertPostsHashtags
 };
