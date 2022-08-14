@@ -1,6 +1,6 @@
-import { getTrendingHashtags } from '../repositories/hashtagRepository.js';
+import { getHashtagPosts, getTrendingHashtags } from '../repositories/hashtagRepository.js';
 
-export default async function trendingHashtags(req, res){
+export async function trendingHashtags(req, res){
 
     try {
 
@@ -12,4 +12,19 @@ export default async function trendingHashtags(req, res){
         res.sendStatus(500);
     }
 
+}
+
+export async function hashtagPosts(req, res){
+
+    try {
+
+        const hashtagName = res.locals.hashtagName;
+
+        const { rows: hashtagPosts } = await getHashtagPosts(hashtagName);
+        res.status(200).send(hashtagPosts);
+
+    } catch(error){
+        console.log(error);
+        res.sendStatus(500);
+    }
 }
