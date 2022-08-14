@@ -1,6 +1,6 @@
 import db from "../database/postgres.js";
 
-function getHashtagByName(hashtagName){
+async function getHashtagByName(hashtagName){
 
     hashtagName = "#" + hashtagName;
 
@@ -11,7 +11,7 @@ function getHashtagByName(hashtagName){
     );
 }
 
-function getTrendingHashtags(){
+async function getTrendingHashtags(){
     return db.query(`
         SELECT  name AS hashtag, 
                 COUNT("hashtagId") AS mentions
@@ -24,7 +24,7 @@ function getTrendingHashtags(){
     );
 }
 
-function getHashtagPosts(hashtagName){
+async function getHashtagPosts(hashtagName){
 
     hashtagName = "#" + hashtagName;
 
@@ -55,8 +55,26 @@ function getHashtagPosts(hashtagName){
     );
 }
 
+async function insertHashtag(hashtagName){
+    return db.query(`
+        INSERT INTO hashtags (name)
+        VALUES $1
+        RETURNING id`,
+        [hashtagName]
+    );
+}
+
+async function insertPostsHashtags(postId, hashtagId){
+    return db.query(`
+        INSERT INTO "postsHashtags" ("postId", "hashtagId")
+        VALUES $1, $2`,
+        [postId, hashtagId]
+    );
+}
+
 export {
     getHashtagByName,
     getTrendingHashtags,
-    getHashtagPosts
+    getHashtagPosts,
+    insertHashtag
 };
