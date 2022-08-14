@@ -1,9 +1,12 @@
 import db from "../database/postgres.js";
 
-function getHashtagByName(){
+function getHashtagByName(hashtagName){
+
+    hashtagName = "#" + hashtagName;
+
     return db.query(`
         SELECT * FROM hashtags
-        WHERE hashtag.name = ($1)`,
+        WHERE name = ($1)`,
         [hashtagName]
     );
 }
@@ -22,8 +25,12 @@ function getTrendingHashtags(){
 }
 
 function getHashtagPosts(hashtagName){
+
+    hashtagName = "#" + hashtagName;
+
     return db.query(`
-        SELECT  name AS hashtag, 
+        SELECT  name AS hashtag,
+                posts.id AS "postId",
                 users."userName", 
                 users."pictureUrl" AS "userImage",
                 posts.content AS "postDescription",
@@ -36,6 +43,7 @@ function getHashtagPosts(hashtagName){
         LEFT JOIN likes ON likes."postId" = posts.id
         WHERE hashtags.name = ($1)
         GROUP BY    hashtags.name, 
+                    posts.id,
                     users."userName", 
                     users."pictureUrl", 
                     posts.content, 

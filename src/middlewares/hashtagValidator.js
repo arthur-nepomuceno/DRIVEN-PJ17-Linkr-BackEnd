@@ -1,9 +1,9 @@
 import { getHashtagByName } from "../repositories/hashtagRepository.js";
 
-export default async function hashtagValidator(res, res, next){
+export default async function hashtagValidator(req, res, next){
 
     const hashtagName = req.params.hashtag;
-
+    
     try {
 
         const { rows: hashtagExists } = await getHashtagByName(hashtagName);
@@ -13,6 +13,7 @@ export default async function hashtagValidator(res, res, next){
         }
 
         res.locals.hashtagName = hashtagName;
+
         next();
 
     } catch {
