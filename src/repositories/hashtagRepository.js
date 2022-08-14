@@ -10,6 +10,11 @@ function getTrendingHashtags(){
     );
 }
 
+function getHashtagPosts(){
+    return db.query(`
+    `);
+}
+
 export {
     getTrendingHashtags
 };

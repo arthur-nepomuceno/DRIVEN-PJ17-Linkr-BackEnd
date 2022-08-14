@@ -4,6 +4,6 @@ import tokenValidator from "../middlewares/tokenValidator.js";
 
 const hashtagRouter = Router();
 
-hashtagRouter.get("/hashtag", /* tokenValidator,  */trendingHashtags);
+hashtagRouter.get("/hashtag", trendingHashtags);
 
 export default hashtagRouter;
