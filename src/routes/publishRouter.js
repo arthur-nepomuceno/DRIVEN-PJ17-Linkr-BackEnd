@@ -7,6 +7,6 @@ import { hashtagChecker } from "../middlewares/hashtagValidator.js";
 
 const publishRouter = Router();
 
-publishRouter.post('/publish', hashtagChecker, publishController);
+publishRouter.post('/publish',schemaValidator(publishSchema), tokenValidator, hashtagChecker, publishController);
 
 export default publishRouter;

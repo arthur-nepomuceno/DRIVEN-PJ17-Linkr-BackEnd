@@ -2,8 +2,8 @@ import { getHashtagByName, insertHashtag, insertPostsHashtags } from "../reposit
 import { createPost } from "../repositories/publishRepository.js";
 
 export default async function publishController(req, res){
-    const { userId, url, content } = req.body;
-    /* const userId = res.locals.userId; */
+    const { url, content } = req.body;
+    const userId = res.locals.userId; 
     const hashtagArray = res.locals.hashtagArray;
     const post = { userId, url, content };
     
