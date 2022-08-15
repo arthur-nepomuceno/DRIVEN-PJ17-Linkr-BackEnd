@@ -1,8 +1,7 @@
 import db from "../database/postgres.js";
 
 async function postLike(userId, postId){
-    console.log(userId)
-    console.log(postId);
+    
     return db.query('INSERT INTO likes ("userId","postId") VALUES ($1, $2) RETURNING id', [userId, postId]
     );
 }

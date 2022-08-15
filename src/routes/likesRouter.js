@@ -5,6 +5,6 @@ import {Like, Unlike} from "../controllers/likeController.js";
 const likeRouter = Router();
 
 likeRouter.post('/like', tokenValidator, Like);
-likeRouter.post('/unlike', tokenValidator, Unlike);
+likeRouter.delete('/unlike/:postId', tokenValidator, Unlike);
 
 export default likeRouter;
