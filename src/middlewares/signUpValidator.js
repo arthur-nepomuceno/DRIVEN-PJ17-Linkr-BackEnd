@@ -15,6 +15,6 @@ export default async function signUpValidator(req, res, next){
         }
         
     } catch(error){
-        return res.status(500).send(error);
+        return res.status(501).send(error);
     }
 };

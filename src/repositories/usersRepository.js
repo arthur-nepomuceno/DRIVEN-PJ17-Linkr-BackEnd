@@ -13,9 +13,17 @@ function createUser(user){
     return db.query('INSERT INTO users (email, password, "userName", "pictureUrl") VALUES ($1, $2, $3, $4)', [email, password, userName, pictureUrl])
 }
 
-
+async function searchUsers(searchTerm) {
+    console.log('repo')
+    try {
+        return await db.query('SELECT "userName", "pictureUrl" FROM users WHERE "userName" ILIKE $1',[`%${searchTerm}%`])
+    } catch (error) {
+        console.log(error)
+    }
+}
 export {
     getUserByEmail,
     getUserByUserName,
-    createUser
+    createUser,
+    searchUsers
 };

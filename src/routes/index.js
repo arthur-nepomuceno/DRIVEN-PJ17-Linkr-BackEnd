@@ -9,6 +9,7 @@ import publishRouter from "./publishRouter.js";
 
 import hashtagRouter from "./hashtagRouter.js";
 import timelineRouter from "./timelineRouter.js";
+import userRouter from "./userRouter.js";
 import likeRouter from "./likesRouter.js"
 
 const router = Router();
@@ -18,6 +19,7 @@ router.use(signInRouter);
 router.use(postRouter);
 router.use(hashtagRouter);
 router.use(timelineRouter);
+router.use(userRouter);
 router.use(likeRouter)
 
-export default router;
+export default router;  
