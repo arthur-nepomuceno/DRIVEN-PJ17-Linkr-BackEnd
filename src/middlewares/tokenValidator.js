@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export default async function validateUser(req, res, next) {
-   
+  
     const authorization = req.headers.authorization;
     
     if(!authorization){

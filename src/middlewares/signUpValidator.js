@@ -3,7 +3,7 @@ import { getUserByEmail, getUserByUserName } from "../repositories/usersReposito
 export default async function signUpValidator(req, res, next){
    
     const body = req.body;
-    console.log(body)
+    
     try{
         const {rows: email} = await getUserByEmail(body.email);
         const {rows: userName} = await getUserByUserName(body.userName);
