@@ -2,6 +2,7 @@ import db from "../database/postgres.js";
 
 function getPosts(){
     const query = (`SELECT posts.id, 
+                        users.id AS "userId",
                         users."userName", 
                         users."pictureUrl" AS "userImage", 
                         posts.content AS "postDescription", 
@@ -12,7 +13,8 @@ function getPosts(){
                     ON users.id = posts."userId"
                     LEFT JOIN likes
                     ON likes."postId" = posts.id
-                    GROUP BY posts.id, 
+                    GROUP BY posts.id,
+                        users.id,
                         users."userName", 
                         users."pictureUrl", 
                         posts.content, 
@@ -32,4 +34,9 @@ function getPostsLikesList(postId){
     return db.query(query);
 }
 
-export { getPosts, getPostsLikesList }
+function getPostById(postId){
+    const query = 'SELECT "userId" FROM posts WHERE id = $1;';
+    return db.query(query, [postId]);
+}
+
+export { getPosts, getPostsLikesList, getPostById }

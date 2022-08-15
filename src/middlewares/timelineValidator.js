@@ -16,6 +16,7 @@ export default async function timelineValidator(req, res, next){
         })
 
         res.locals.posts = posts;
+        console.log(res.locals.posts)
         return next();
 
     } catch(error) {
