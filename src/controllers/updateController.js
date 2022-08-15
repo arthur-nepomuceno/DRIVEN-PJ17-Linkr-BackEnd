@@ -2,7 +2,7 @@ import { updatePostById } from "../repositories/updateRepository.js"
 
 export default async function updateController(req, res){
     const { content } = req.body;
-    const { id } = req.params;
+    const { id } = req.body;
 
     try {
 

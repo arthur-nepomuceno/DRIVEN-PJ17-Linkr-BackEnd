@@ -2,7 +2,6 @@ import { Router } from "express";
 import { schemaValidator } from "../middlewares/schemaValidator.js";
 import publishSchema from "../schemas/publishSchema.js";
 import updateSchema from "../schemas/updateSchema.js";
-import deleteSchema from "../schemas/deleteSchema.js";
 import tokenValidator from "../middlewares/tokenValidator.js"
 import updateValidator from "../middlewares/updateValidator.js";
 import deleteValidator from "../middlewares/deleteValidator.js";

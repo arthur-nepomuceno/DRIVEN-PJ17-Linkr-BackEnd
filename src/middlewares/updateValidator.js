@@ -2,7 +2,7 @@ import { getPostById } from "../repositories/postsRepository.js";
 
 export default async function updateValidator(req, res, next){
     const userIdToken = res.locals.userId;
-    const { id } = req.params;
+    const { id } = req.body;
     
     try {
         const {rows: post} = await getPostById(id);
