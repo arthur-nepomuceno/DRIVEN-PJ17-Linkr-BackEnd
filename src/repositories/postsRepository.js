@@ -32,4 +32,9 @@ function getPostsLikesList(postId){
     return db.query(query);
 }
 
-export { getPosts, getPostsLikesList }
+function getPostById(postId){
+    const query = 'SELECT "userId" FROM posts WHERE id = $1;';
+    return db.query(query, [postId]);
+}
+
+export { getPosts, getPostsLikesList, getPostById }
