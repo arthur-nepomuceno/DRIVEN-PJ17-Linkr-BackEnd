@@ -6,13 +6,13 @@ import publishSchema from "../schemas/publishSchema.js";
 import updateController from "../controllers/updateController.js";
 import updateSchema from "../schemas/updateSchema.js";
 import updateValidator from "../middlewares/updateValidator.js";
-import { hashtagChecker } from "../middlewares/hashtagValidator.js";
+import { hashtagValidator } from "../middlewares/hashtagValidator.js";
 
 
 const publishRouter = Router();
 
 
 publishRouter.post('/publish/:id', schemaValidator(updateSchema), tokenValidator , updateValidator ,updateController);
-publishRouter.post('/publish',schemaValidator(publishSchema), tokenValidator, hashtagChecker, publishController);
+publishRouter.post('/publish',schemaValidator(publishSchema), tokenValidator, hashtagValidator, publishController);
 
 export default publishRouter;
