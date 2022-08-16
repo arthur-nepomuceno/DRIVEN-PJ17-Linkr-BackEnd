@@ -3,7 +3,7 @@ import db from "../database/postgres.js";
 async function getHashtagByName(hashtagName){
     return db.query(`
         SELECT * FROM hashtags
-        WHERE name = ($1)`,
+        WHERE name = $1`,
         [hashtagName]
     );
 }

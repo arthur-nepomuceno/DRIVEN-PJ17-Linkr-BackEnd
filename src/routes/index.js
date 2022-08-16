@@ -16,6 +16,7 @@ const router = Router();
 
 router.use(signUpRouter);
 router.use(signInRouter);
+router.use(publishRouter);
 router.use(postRouter);
 router.use(hashtagRouter);
 router.use(timelineRouter);
