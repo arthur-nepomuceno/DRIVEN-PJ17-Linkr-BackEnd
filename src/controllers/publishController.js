@@ -19,7 +19,6 @@ export default async function publishController(req, res){
 
             if(hashtagExists.length === 0){
                const { rows: hashtagInfo } = await insertHashtag(hashtag);
-               console.log(hashtagInfo)
                await insertPostsHashtags(postInfo[0].id, hashtagInfo[0].id);
             } else {
                await insertPostsHashtags(postInfo[0].id, hashtagExists[0].id);

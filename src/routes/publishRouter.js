@@ -7,6 +7,7 @@ import { publishHashtagValidator } from "../middlewares/publishHashtagValidator.
 import updateController from "../controllers/updateController.js";
 import updateSchema from "../schemas/updateSchema.js";
 import updateValidator from "../middlewares/updateValidator.js";
+import { hashtagValidator } from "../middlewares/hashtagValidator.js";
 
 const publishRouter = Router();
 
