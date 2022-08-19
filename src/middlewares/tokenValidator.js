@@ -7,7 +7,7 @@ export default async function validateUser(req, res, next) {
     if(!authorization){
 
         return res.sendStatus(401)
-    
+     
     }
     const token = authorization.split(' ')[1]
 

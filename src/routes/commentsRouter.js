@@ -1,11 +1,12 @@
 import { Router } from "express";
 import tokenValidator from "../middlewares/tokenValidator.js";
-import {Comment} from "../controllers/commentsController.js";
+import {Comment,getPostComment} from "../controllers/commentsController.js";
 import { schemaValidator } from "../middlewares/schemaValidator.js";
 import commentSchema from "../schemas/commentSchema.js";
 
-const likeRouter = Router();
+const commentsRouter = Router();
 
-likeRouter.post('/comments',schemaValidator(commentSchema), tokenValidator, Comment);
+commentsRouter.post('/comments',schemaValidator(commentSchema), tokenValidator, Comment);
+commentsRouter.get('/comments/:id', tokenValidator , getPostComment);
 
-export default likeRouter;
+export default commentsRouter;
